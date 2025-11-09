@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>💜 Uma Mensagem Especial</title>
+<title>💙 Uma Mensagem Especial</title>
 <style>
 :root{
   --bg:#0b0013;
-  --accent1:#b19cff;
-  --accent2:#d3a3ff;
+  --accent1:#89CFF0; /* Azul bebê */
+  --accent2:#a6d4ff; /* Azul bebê mais claro */
   --glass: rgba(255,255,255,0.04);
 }
 *{box-sizing:border-box}
@@ -31,7 +31,7 @@ body{
 /* mensagem central */
 .message-box{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(180,120,255,0.12);
+  border: 1px solid rgba(137,207,240,0.12); /* Azul bebê */
   border-radius:16px;
   padding:40px 30px;
   max-width:600px;
@@ -44,7 +44,7 @@ body{
   font-size:2rem;
   color:var(--accent2);
   margin-bottom:20px;
-  text-shadow:0 0 16px rgba(179,108,255,0.2);
+  text-shadow:0 0 16px rgba(137,207,240,0.2);
 }
 
 .message-box p{
@@ -59,7 +59,7 @@ body{
   position:fixed;
   top:-20px;
   font-size:20px;
-  color:#d9bfff;
+  color:#89CFF0; /* Azul bebê */
   opacity:.8;
   z-index:0;
   animation:fall linear forwards;
@@ -73,7 +73,7 @@ body{
 <body>
 
 <div class="message-box">
-  <h1>💜 Feliz Aniversário!</h1>
+  <h1>💙 Feliz Aniversário!</h1>
   <p>
     Eu quero que você saiba que te amo mais do que tudo nesse mundo e que não quero te perder nunca. Eu sei que às vezes a gente briga, que tem dias difíceis, mas isso nunca vai diminuir o quanto você é importante pra mim. Te amo muito, muito, muito mesmo! ❤️
 
@@ -81,8 +81,7 @@ Nunca vou esquecer da primeira vez que conversamos, daquele momento que mudou tu
 
 Você é a pessoa que me faz sorrir mesmo nos dias mais difíceis, que me entende sem eu precisar explicar nada, que me completa de um jeito que ninguém mais consegue. Eu admiro tanto você, sua força, seu jeito único de ser, e cada detalhe seu é especial pra mim.
 
-
-Quero que o seu dia seja incrível, cheio de amor, alegria e momentos que fiquem na memória. E que a gente continue criando lembranças juntos, crescendo juntos, superando tudo lado a lado. Te amo demais e sempre vou te amar, de um jeito que palavras não conseguem nem explicar. 💜
+Quero que o seu dia seja incrível, cheio de amor, alegria e momentos que fiquem na memória. E que a gente continue criando lembranças juntos, crescendo juntos, superando tudo lado a lado. Te amo demais e sempre vou te amar, de um jeito que palavras não conseguem nem explicar. 💙
   </p>
 </div>
 
@@ -91,7 +90,7 @@ Quero que o seu dia seja incrível, cheio de amor, alegria e momentos que fiquem
 function createHeart() {
   const h = document.createElement('div');
   h.className = 'floating-heart';
-  h.textContent = '💜';
+  h.textContent = '💙';
   h.style.left = Math.random()*100 + 'vw';
   h.style.fontSize = (Math.random()*28 + 14) + 'px';
   h.style.animationDuration = (Math.random()*5 + 4) + 's';
