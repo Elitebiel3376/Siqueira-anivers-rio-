@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>💜 Nossa História</title>
+<style>
+:root{
+  --bg:#0b0013;
+  --accent1:#b19cff;
+  --accent2:#d3a3ff;
+  --glass: rgba(255,255,255,0.04);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background: radial-gradient(circle at 10% 10%, #0b0013 0%, #000 40%);
+  color:#f3eaff;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* header */
+header{
+  text-align:center;
+  padding:48px 20px 10px;
+  position:relative;
+  z-index:2;
+}
+header h1{
+  margin:0;
+  font-size:2.2rem;
+  color:var(--accent2);
+  text-shadow:0 0 18px rgba(179,108,255,0.18);
+}
+header p{
+  margin:10px 0 0;
+  color:#d9cfff;
+  opacity:0.95;
+}
+
+/* timeline container */
+.timeline-wrap{
+  width:100%;
+  max-width:1000px;
+  margin:36px auto 80px;
+  padding:20px;
+  position:relative;
+  z-index:2;
+}
+
+/* center vertical line */
+.timeline-line{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:100%;
+  background: linear-gradient(180deg,var(--accent1),var(--accent2));
+  border-radius:6px;
+  box-shadow:0 0 20px rgba(166,77,255,0.15);
+  z-index:1;
+}
+
+/* items */
+.item{
+  position:relative;
+  width:calc(50% - 40px);
+  padding:18px;
+  margin:30px 20px;
+  border-radius:14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(180,120,255,0.12);
+  box-shadow: 0 6px 22px rgba(22, 6, 38, 0.6);
+  backdrop-filter: blur(4px);
+  z-index:2;
+  transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .25s;
+  cursor:pointer;
+  opacity:0;
+  transform: translateY(20px) scale(.98);
+}
+.item:hover{
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(166,77,255,0.12);
+}
+.item.show{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+/* left / right */
+.item.left{
+  margin-left:0;
+  margin-right:auto;
+  transform-origin: right center;
+}
+.item.right{
+  margin-left:auto;
+  margin-right:0;
+  transform-origin: left center;
+}
+
+/* date badge and dot */
+.date{
+  display:inline-block;
+  font-weight:600;
+  color:var(--accent2);
+  margin-bottom:8px;
+}
+.dot{
+  position:absolute;
+  top:24px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background: linear-gradient(180deg,var(--accent2),var(--accent1));
+  box-shadow:0 0 18px rgba(166,77,255,0.25);
+  left:calc(50% - 10px);
+  transform:translateX(-50%);
+  z-index:3;
+}
+
+/* content inside item */
+.item h3{
+  margin:6px 0 8px;
+  font-size:1.25rem;
+  color:#f9f3ff;
+}
+.item p{
+  margin:0;
+  color:#eaddff;
+  opacity:0.95;
+  line-height:1.5;
+  font-size:0.98rem;
+}
+.item .meta{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.chip{
+  padding:6px 10px;
+  background:var(--glass);
+  border-radius:999px;
+  color:#e6dbff;
+  font-size:0.85rem;
+  border:1px solid rgba(180,120,255,0.08);
+}
+
+/* mobile */
+@media (max-width:840px){
+  .timeline-line{ left:20px; transform:none; width:4px; }
+  .item{ width:calc(100% - 90px); margin:18px 0 18px 60px; }
+  .item.left, .item.right { margin:18px 0 18px 60px; }
+  .dot{ left:20px; transform:none; }
+}
+
+/* cute floating hearts (behind) */
+.floating-heart{
+  position:fixed;
+  top:-20px;
+  font-size:20px;
+  color:#d9bfff;
+  opacity:.8;
+  z-index:0;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  0% { transform:translateY(0) rotate(0); opacity:1 }
+  100% { transform:translateY(110vh) rotate(360deg); opacity:0 }
+}
+
+/* small hint */
+.hint{ font-size:0.9rem; color:#cdb8ff; margin-top:10px; opacity:0.9; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💜 Nossa História</h1>
+  <p>FELIZ ANIVERSÁRIO GATINHA.</p>
+</header>
+
+<main class="timeline-wrap" id="timelineWrap">
+  <div class="timeline-line" aria-hidden="true"></div>
+
+  <!-- exemplo de momentos -->
+  <article class="item left" data-link="#" role="button" tabindex="0">
+    <div class="date">27/11/2025</div>
+    <h3>🎉 Seu Aniversário</h3>
+    <p>O dia mais especial do ano — queremos celebrar você, seus sonhos e todo o amor que espalha.</p>
+    <div class="meta">
+      <span class="chip">Especial</span>
+      <span class="chip">Hoje</span>
+    </div>
+  </article>
+
+  <article class="item right" data-link="mensagem.html" role="button" tabindex="0">
+    <div class="date">—</div>
+    <h3>💌 Mensagens</h3>
+    <p>Um cantinho cheio de carinho e lembranças para você reviver cada sorriso e emoção.</p>
+    <div class="meta">
+      <span class="chip">Memórias</span>
+    </div>
+  </article>
+
+  
+</main>
+
+<script>
+// reveal items on scroll
+const items = Array.from(document.querySelectorAll('.item'));
+function reveal(){
+  const top = window.scrollY + window.innerHeight;
+  items.forEach((it, i)=>{
+    const rect = it.getBoundingClientRect();
+    const elTop = rect.top + window.scrollY;
+    if(top > elTop + 50){
+      setTimeout(()=> it.classList.add('show'), i*80);
+    }
+  });
+}
+reveal();
+window.addEventListener('scroll', reveal);
+window.addEventListener('resize', reveal);
+
+// click / keyboard interaction
+items.forEach(it=>{
+  const link = it.dataset.link;
+  it.addEventListener('click', ()=>{ if(link && link!=='#') window.location.href = link; });
+  it.addEventListener('keydown', (e)=>{ if((e.key==='Enter'||e.key===' ') && link && link!=='#') window.location.href = link; });
+});
+
+// floating hearts
+function createHeart() {
+  const h = document.createElement('div');
+  h.className = 'floating-heart';
+  h.textContent = '💜';
+  h.style.left = Math.random()*100 + 'vw';
+  h.style.fontSize = (Math.random()*28 + 14) + 'px';
+  h.style.animationDuration = (Math.random()*5 + 4) + 's';
+  h.style.opacity = (Math.random()*0.6 + 0.4);
+  document.body.appendChild(h);
+  setTimeout(()=> h.remove(), 7000);
+}
+setInterval(createHeart, 350);
+</script>
+</body>
+</html>

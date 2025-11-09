@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem Regressiva</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #1a0a3d;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      cursor: none;
+    }
+
+    :root {
+      --neon-color: #89CFF0; /* Azul bebê */
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--neon-color);
+      text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 20px var(--neon-color), 0 0 40px var(--neon-color);
+      animation: neonPulse 1.5s infinite alternate;
+    }
+
+    #countdown {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: var(--neon-color);
+      text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 20px var(--neon-color), 0 0 40px var(--neon-color);
+    }
+
+    #surpriseButton {
+      display: none;
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      background: transparent;
+      color: var(--neon-color);
+      border: 3px solid var(--neon-color);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
+    }
+
+    #surpriseButton:hover {
+      background: var(--neon-color);
+      color: #1a0a3d;
+      box-shadow: 0 0 20px var(--neon-color), 0 0 40px var(--neon-color);
+    }
+
+    @keyframes neonPulse {
+      0%, 100% {
+        text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 20px var(--neon-color), 0 0 40px var(--neon-color);
+      }
+      50% {
+        text-shadow: 0 0 20px var(--neon-color), 0 0 30px var(--neon-color), 0 0 50px var(--neon-color), 0 0 80px var(--neon-color);
+      }
+    }
+
+    h1, #countdown, #surpriseButton {
+      animation: neonPulse 1.5s infinite alternate;
+    }
+
+    /* Digitais neon */
+    .fingerprint {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--neon-color);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 6s infinite;
+      mix-blend-mode: screen;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0.2; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0.2; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Faltam para o seu aniversário!</h1>
+  <div id="countdown">Carregando...</div>
+  <button id="surpriseButton" onclick="window.location.href='surpresa.html'">Clique aqui!</button>
+
+  <!-- Áudio tic tac -->
+  <audio id="ticTacAudio" autoplay loop>
+    <source src="espera.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    // Contagem regressiva
+    const birthday = new Date("December 12, 2025 00:00:00").getTime();
+    const countdownEl = document.getElementById('countdown');
+    const buttonEl = document.getElementById('surpriseButton');
+    const ticTacAudio = document.getElementById('ticTacAudio');
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      } else {
+        clearInterval(interval);
+        countdownEl.style.display = 'none';
+        buttonEl.style.display = 'inline-block';
+        ticTacAudio.pause(); // Para o som quando acabar
+      }
+    }, 1000);
+
+    // Digitais iniciais
+    const fingerprints = [];
+    for (let i = 0; i < 12; i++) {
+      const fp = document.createElement('div');
+      fp.classList.add('fingerprint');
+      fp.style.left = Math.random() * 100 + 'vw';
+      fp.style.animationDuration = (5 + Math.random() * 5) + 's';
+      fp.style.width = fp.style.height = (30 + Math.random() * 50) + 'px';
+      fp.style.borderWidth = (2 + Math.random() * 3) + 'px';
+      document.body.appendChild(fp);
+      fingerprints.push(fp);
+    }
+
+    // Interação com mouse
+    document.addEventListener('mousemove', (e) => {
+      fingerprints.forEach(fp => {
+        const dx = e.clientX - (fp.offsetLeft + fp.offsetWidth / 2);
+        const dy = e.clientY - (fp.offsetTop + fp.offsetHeight / 2);
+        const distance = Math.sqrt(dx*dx + dy*dy);
+        const scale = Math.min(2, 150 / distance);
+        fp.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        fp.style.opacity = Math.min(1, 150 / distance);
+      });
+    });
+
+    // Digitais surgindo no clique
+    document.addEventListener('click', (e) => {
+      const newFp = document.createElement('div');
+      newFp.classList.add('fingerprint');
+      newFp.style.left = e.clientX + 'px';
+      newFp.style.top = e.clientY + 'px';
+      newFp.style.width = newFp.style.height = (30 + Math.random() * 50) + 'px';
+      newFp.style.borderWidth = (2 + Math.random() * 3) + 'px';
+      document.body.appendChild(newFp);
+
+      const duration = 5 + Math.random() * 5;
+      newFp.animate([
+        { transform: `translateY(0px) scale(0.5)`, opacity: 0.6 },
+        { transform: `translateY(-100px) scale(1)`, opacity: 0 }
+      ], { duration: duration * 1000, easing: 'ease-out' });
+
+      setTimeout(() => { newFp.remove(); }, duration * 1000);
+    });
+  </script>
+
+</body>
+</html>
